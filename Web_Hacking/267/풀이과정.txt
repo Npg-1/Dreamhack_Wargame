@@ -1,0 +1,5 @@
+문제 파일을 받은 다음에 index.html을 실행함, 그리고 개발자 도구의 source에서 DH라는 문자열을 찾음
+근데 그냥 모든 파일을 일일이 ctrl + f 하는 건 빡세고, Ctrl + Shift + F 를 하면 파일 전체에서 찾을 수 있음
+
+그리고 이건 vs code에서도 동일해서 vs code에서도 Flag가 있는 파일이 있으니까 Ctrl + Shift + F 를 하고 DH를 검색하면 찾을 수 있음
+
