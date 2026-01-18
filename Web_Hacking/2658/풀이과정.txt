@@ -1,0 +1,2 @@
+먼저 app.py를 확인함
+upload_memo()를 보는데 filename은 그대로 filename에 입력하지만 content는 utf-8로 인코딩을 하고 content에 할당함

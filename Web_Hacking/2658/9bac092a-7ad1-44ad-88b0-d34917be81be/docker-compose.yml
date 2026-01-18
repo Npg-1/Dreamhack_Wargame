@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  memo_maker:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: memo_maker
+    image: memo_maker
+    ports:
+      - 8000:8000
+    user: "YP"
