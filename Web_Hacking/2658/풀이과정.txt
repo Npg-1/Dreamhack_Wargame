@@ -1,2 +1,46 @@
 먼저 app.py를 확인함
 upload_memo()를 보는데 filename은 그대로 filename에 입력하지만 content는 utf-8로 인코딩을 하고 content에 할당함
+
+
+위에 건 그다지 중요하지 않은 거 같고
+@APP.route('/read')
+def read_memo():
+이 함수가 중요하네
+
+.....//////.....////// 일케 해서 상위 디렉토리로 이동하면서 디렉토리들을 탐색할 수 있다는 건 알겠는데 도대체 어디를 봐야하는지 모르겠음
+
+결국 하다가 막혀서 제미나이 사용, 2026-01-19에서 물어봄
+
+리눅스 시스템의 기본 파일인 passwd는 /etc 에 위치함
+
+/etc/passwd 를 읽었고 home/YP/ 에서 flag.txt를 찾아봤지만 안 보임 GG
+
+# root:x:0:0:root:/root:/bin/bash
+# daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+# bin:x:2:2:bin:/bin:/usr/sbin/nologin
+# sys:x:3:3:sys:/dev:/usr/sbin/nologin
+# sync:x:4:65534:sync:/bin:/bin/sync
+# games:x:5:60:games:/usr/games:/usr/sbin/nologin
+# man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+# lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+# mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+# news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+# uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+# proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+# www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+# backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+# list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+# irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+# _apt:x:42:65534::/nonexistent:/usr/sbin/nologin
+# nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+# YP:x:100:101::/home/YP:/usr/sbin/nologin
+
+filename = str
+f = filename.replace("//", "/") # filename에서 '//' -> '/'로 변경
+f = f.replace("../", "")        # filename에서 '../' -> ''로 변경
+f = f.replace("./", "")         # filename에서 './' -> ''로 변경
+f = f.replace("\\\\", "\\")     # filename에서 '\\\\' -> '\\'로 변경
+f = f.replace("\\", "")         # filename에서 '\\' -> ''로 변경
+
+print(f'uploads/{f}')
+

