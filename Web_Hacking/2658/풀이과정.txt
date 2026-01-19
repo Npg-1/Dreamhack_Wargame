@@ -15,6 +15,8 @@ def read_memo():
 
 /etc/passwd 를 읽었고 home/YP/ 에서 flag.txt를 찾아봤지만 안 보임 GG
 
+-> 월요일에 순우가 Dockerfile에 힌트가 있다고 힌트를 알려줌
+
 # root:x:0:0:root:/root:/bin/bash
 # daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 # bin:x:2:2:bin:/bin:/usr/sbin/nologin
@@ -43,4 +45,60 @@ f = f.replace("\\\\", "\\")     # filename에서 '\\\\' -> '\\'로 변경
 f = f.replace("\\", "")         # filename에서 '\\' -> ''로 변경
 
 print(f'uploads/{f}')
+
+cp flag.txt /tmp/back_up_YP/flag.back.txt
+
+
+
+
+
+app.py 좀 보다가 upload_memo()는 크게 문제 없어 보여서 read_memo()로 넘어감
+read_memo()를 보니까 filename을 필터링하는 과정이 좀 애매함, 어색함, 어눌함, 
+".....//////" 를 쓰면 "../"를 만들 수 있다는 걸 알게됨 이걸 이용해서 사이트 url의 name값을 이용해서
+사이트의 파일 경로를 다 탐색해볼 수 있는데.. 거기까지임 flag.txt값을 어캐 찾아야 할지 모르겠음
+그렇게 해보다가 제미나이를 사용해서 /etc/passwd를 확인해봄
+
+
+# root:x:0:0:root:/root:/bin/bash
+# daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+# bin:x:2:2:bin:/bin:/usr/sbin/nologin
+# sys:x:3:3:sys:/dev:/usr/sbin/nologin
+# sync:x:4:65534:sync:/bin:/bin/sync
+# games:x:5:60:games:/usr/games:/usr/sbin/nologin
+# man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+# lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+# mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+# news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+# uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+# proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+# www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+# backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+# list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+# irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+# _apt:x:42:65534::/nonexistent:/usr/sbin/nologin
+# nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+# YP:x:100:101::/home/YP:/usr/sbin/nologin
+
+이런 게 보여서 일단 /home/YP/flag.txt 처럼 해봐도 안 나와서 GG침
+원석이형이 문제 설명의 "history"를 보면 된다고 해서 검색하다가 ".bash_history"를 찾으면 된다는 걸 알게됨
+/home/YP/.bash_history 를 찾아보니까 "cp flag.txt /tmp/back_up_YP/flag.back.txt"
+를 찾고 flag.txt가 복사된 /tmp/back_up_YP/flag.back.txt를 찾고 답이 나옴
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

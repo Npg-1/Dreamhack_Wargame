@@ -23,7 +23,6 @@ def upload_memo():
         return redirect('/')
     return render_template('upload.html')
 
-
 @APP.route('/read')
 def read_memo():
     error = False
