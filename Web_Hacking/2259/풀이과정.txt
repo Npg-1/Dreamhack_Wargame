@@ -1,0 +1,10 @@
+문제를 보다보니까 claim()에서 age가 5이상이기만 하면 FLAG 값을 얻을 수 있다는 걸 알았음 그러면 age가 5이상이 되려면 어떻게 하면 되느냐
+age는 _now()와 last_hb 두 값의 차이로 생김, _now() 값은 time.time()이어서 클라이언트에서 어떻게 할 수는 없어보임
+그러러면 last_hb을 수정해야하는데 last_hb은 session에서 last_hb값을 가져오고 session["last_hb"]의 값은 _ensure_session()와, '/', /'hb'에서 수정함
+index()는 홈페이지에 들어갈 때만 일시적으로 초기화하니까 괜찮지만 index.html에서 setInterval()을 통해서 계속 session["last_hb"]을 초기화하는 게 문제임
+그래서 hb()에서 "sid"가 session안에 없으면 last_hb이 초기화 안 돼서 이렇게 할 수도 있을 거 같음, 그래서 검사도구를 통해서 session값을 어떻게 수정해볼까 해봤지만 그것도 안 됨
+제미나이한테 물어보니까 index.html에서 setInterval로 계속 /hb에 POST를 보내는 게 문제니까 setInterval을 중단시키거나 차단하면 된다고 하는데.. 어캐함
+문제푸는 방법은 알 거 같은데 그걸 실행하기 위한 방법을 몰라서 OUT!
+
+
+여기서 '/hb'에서 sid가 session에 없으면 session["last_hb"]=_now() 가 실행이 안 돼서 어떻게 될 것도 같은데.. 
