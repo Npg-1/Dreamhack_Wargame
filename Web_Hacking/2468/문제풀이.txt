@@ -1,0 +1,42 @@
+문제를 보니까 app.py, index.html에는 그다지 중요한 내용은 없어보이고
+
+game.js에 fetchFlagAndShow()가 실행되면 좋을 거 같음
+
+근데 fetchFlagAndShow()가 실행되려면 currentLevel == 5인 상태에서 triggerClear()가 실행되면 됨
+
+highestUnlocked는 브라우저에서 Value값을 바꿔서 레벨5로 들어가면 currentLevel은 5가 됨
+
+이제 triggerClear()만 실행되면 됨 triggerClear()의 실행은 updateProgress()에서 실행하는데
+ratio(현재 긁은 픽셀 범위) >= CLEAR_THRESHOLD(0.9) 이기만 하면 됨
+CLEAR_THRESHOLD는 상수니까 pass하면 ratio를 0.9 이상으로 만들면 됨
+
+ratio는 scratchedLinePixels / totalLinePixels 으로 결정됨
+
+totalLinePixels을 줄여볼까 했는데 totalLinePixels은 수정할 수 없어보임
+scratchedLinePixels은
+
+
+못 풀었음 땅땅!!
+
+
+
+않이 10에바임 진짜;;
+진짜 에바임 ㅈ같노
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
