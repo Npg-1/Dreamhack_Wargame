@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  api:
+    build: ./deploy/api
+    environment:
+      SQLITE_PATH: /data/jukebox.db
+    ports:
+      - "5000:5000"
+    volumes:
+      - api_data:/data
+    restart: unless-stopped
+
+  web:
+    container_name: web
+    build: ./deploy/web
+    ports:
+      - "54321:80"
+    restart: unless-stopped
+    depends_on:
+      - api
+
+volumes:
+  api_data:
