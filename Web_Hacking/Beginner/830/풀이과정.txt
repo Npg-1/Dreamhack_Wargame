@@ -1,0 +1,11 @@
+뭐지 이건 좀 어지러운데
+
+그나마 배운 점이라고 한다면
+
+- redirect(url_for("step2", prev_step_num = step1_num))
+- render_template("step1.html", text = step1_text)
+
+redirect는 지정한 url로 페이지를 '이동'하는 거여서 현재 페이지의 데이터는 사라짐
+render_template는 지정한 url로 이동하는 것이 아니라 해당 페이지를 '띄우기'만 하는 거여서 url이 바뀌지 않고 현재 페이지의 데이터도 그대로 남음
+
+이정도 같네. 이거 쉬운문제인데 좀 너무 깊게 생각한 거 같기도.. 나중에 다시 볼만한 가치가 있을 거 같기도함
