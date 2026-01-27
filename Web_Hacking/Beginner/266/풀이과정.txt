@@ -1,0 +1,26 @@
+app.py 에서 처음에 '/'에 들어가면 쿠키에서 'sessionid'를 받아옴
+그리고 session_storage에서 sission_id에 해당하는 value를 받아와서 username에 할당함
+
+/를 들어가면 일단 username에 값이 받아와지는데 처음에는 session_storage가 비어있기 때문에 username도 비어있음
+index.html로 이동할 때 username이 admin이면 FLAG가 출력됨
+따라서 session_storage에 admin이라는 value가 들어있으면??
+
+로그인 할 때 id, pw값을 받아와서 username, password를 할당함
+users에 username(guest:guest, user:user, admin:FLAG)에 해당하는 key값을 받아와서 pw에 할당
+
+pw값이 password와 일치하면 session_storage[session_id] = username
+
+
+session_storage[197eab7a] = 'guest'
+
+session_storage에는 value가 admin인 값이 들어있음
+문제는 key값을 모른다는 거임
+
+이걸 어떻게 풀까하다가 제미나이한테도 물어보고 다른 애들한테도 물어보니까 나온 답이
+마지막에 session_storage[os.urandom(1).hex()] = 'admin' 이 urandom(1)로 00~FF까지 256가지의 경우의 수 밖에 안 되니까
+그냥 브루트포스로 풀라고 하는데 아 이건 좀;;; 하다가 그냥 웹사이트 주소로
+session_id값을 바꾸는 코드를 제미나이로 작성해서 보냄
+
+그렇게 해서 풀긴 했는데 살짝 찝찝하네요
+
+

