@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>POST 결과</title>
+</head>
+<body>
+    <h1>전송된 결과</h1>
+    <?php
+        // POST로 넘어온 'some'이라는 이름을 가진 데이터를 출력합니다.
+        if (isset($_POST['some'])) {
+            echo "<p>입력하신 값: <strong>" . htmlspecialchars($_POST['some']) . "</strong></p>";
+        } else {
+            echo "<p>전송된 데이터가 없습니다.</p>";
+        }
+    ?>
+    <button onclick="history.back()">뒤로 가기</button>
+</body>
+</html>
