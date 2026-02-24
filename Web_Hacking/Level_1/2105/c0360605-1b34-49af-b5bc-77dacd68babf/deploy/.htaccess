@@ -1,0 +1,3 @@
+<Limit DELETE>                  <!-- HTTP 요청들 중에서 DELETE 메서드를 거부한다는 것 -->
+        Require all denied
+</Limit>
