@@ -1,0 +1,40 @@
+2단계 치고는 살짝 쉽긴 했지만 난 일단 못 풀었음ㅋ!
+
+문제는 간단함 /secrets/(16진수 랜덤값)/에 flag가 있고 (16진수 랜덤값)/flag를 경로로 입력하면 사이트가 해당 파일을 출력하는 간단한 사이트임
+
+get_index()를 보면 처음에 session['secret'] = flag_path 라고 되어 있어서 사이트에서 검사도구를 통해 쿠키값을 보면
+session값이 .eJwtxrERgDAIAMBdskA4IJC4DQKxsTJ2nrvb-NU_ZaVfeZftz6oNcOzTabhOiSRJbmBB5hLck4wVQVWj09BEI4NUkCbIlGxc52lHeT_lABpb.aZ-kCw.l9YNBCqch-KPqnxx_Q7HWwiAKA8
+이렇게 들어있음 이제 여기에 secret의 value인 flag_path가 들어있을 테니까 그걸 알아내면 되는데 난 안 됐음
+
+알아보니 flask에서는 세션에 포함된 데이터는 JSON 형태로 변환 -> (크기가 어느정도 크다면) zlib 형태로 압축 -> base64로 인코딩됨
+따라서 반대로 base64 디코딩 -> zlib 압축 해제를 하면 원본 데이터를 JSON 형태로 볼 수 있음
+Dreamhack Tools에서 Cyber Chef를 통해서 위 과정을 수행
+
+- 원본 세션 값
+.eJwtxrERgDAIAMBdskA4IJC4DQKxsTJ2nrvb-NU_ZaVfeZftz6oNcOzTabhOiSRJbmBB5hLck4wVQVWj09BEI4NUkCbIlGxc52lHeT_lABpb.aZ-kCw.l9YNBCqch-KPqnxx_Q7HWwiAKA8
+
+- 원본 세션 값에서 앞의 .을 빼고 뒤에 패딩(=)을 3개 넣음 값 (패딩이 없거나 적으면 문제가 발생할 수 있다는 것 같기도 하네요)
+eJwtxrERgDAIAMBdskA4IJC4DQKxsTJ2nrvb-NU_ZaVfeZftz6oNcOzTabhOiSRJbmBB5hLck4wVQVWj09BEI4NUkCbIlGxc52lHeT_lABpb.aZ-kCw.l9YNBCqch-KPqnxx_Q7HWwiAKA8===
+
+- 세션값을 URL_SAFE 방식으로 base64 디코딩한 값
+(바이너리값이 출력되는데 문자 형식이 달라서 여기에 적을 수 없음)
+
+- Base64 디코딩한 값을 zlib으로 압축 해제한 값
+{"secret":"secrets/5029bfc39c7f6de36e450ad3ac6d48e3a4720777d8397e2a3a0e70656243e4a4/flag"}
+
+
+ 
+.eJwtxrERgDAIAMBdskA4IJC4DQKxsTJ2nrvb-NU_ZaVfeZftz6oNcOzTabhOiSRJbmBB5hLck4wVQVWj09BEI4NUkCbIlGxc52lHeT_lABpb.aZ-kCw.l9YNBCqch-KPqnxx_Q7HWwiAKA8
+.eJwtxrERQjEIBuBdskA4IPDiNgh_bKyMnfd2T2P3_dpGfvBtjz92H8TzuVJm-rKCGHRQlERa6QUJdSZ3r0umg0OC4GTDWAUa2tc7Xu0-5QAaWw
+.eJwtxrERQjEIBuBdskA4IPDiNgh_bKyMnfd2T2P3_dpGfvBtjz92H8TzuVJm-rKCGHRQlERa6QUJdSZ3r0umg0OC4GTDWAUa2tc7Xu0-5QAaWw
+
+
+%BF2E 이런 게 많다 -> URL 인코딩 의심해볼만함, (%2E -> . 을 나타냄)
+Base64로 인코딩하면 뒤에 =가 붙음 이런 특징들을 보고 이건 URL/Base64 인코딩 되어 있다는 걸 어느정도 알 수 있음
+
+
+
+
+
+
+
