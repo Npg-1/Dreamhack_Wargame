@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Memo</title>
+</head>
+<body>
+  <h2>Welcome, {{ username }}!</h2>
+  <form method="GET" action="/memo">
+    <input type="text" name="text" placeholder="Enter memo" />
+    <button type="submit">Submit</button>
+  </form>
+
+  {% if memo_text %}
+    <p><strong>Memo:</strong> {{ memo_text | safe }}</p>
+    <p><strong>Encrypted:</strong> {{ xor_result }}</p>
+  {% endif %}
+
+  <form method="POST" action="/logout">
+    <button type="submit">Logout</button>
+  </form>
+</body>
+</html>
