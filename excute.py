@@ -1,7 +1,44 @@
-import base64
-import urllib
+# DH{55f2394156567886667940273839575eb0af4b3f115345f0cc8b9}
+# 55f239415656788666
 
-user_input_str = __builtins__.input("입력값: ")
+## This is a sample FLAG ##
 
-print('변환 전: ', user_input_str)
-print('변환 후: ', urllib.parse.quote(user_input_str))
+FLAG = "DH{55f2394156567886667940273839575eb0af4b3f115345f0cc8b9}"
+org = FLAG[10:29]
+org = int(org)
+
+print(org)
+
+
+# 바뀌기 전 값
+after_changing = "1_c_3_c_0__ff_3e"
+
+
+# 1565 6788 6667 9402 738
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
