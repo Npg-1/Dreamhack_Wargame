@@ -14,9 +14,9 @@ def index():
 @APP.route('/upload', methods=['GET', 'POST'])
 def upload_memo():
     if request.method == 'POST':
-        filename = request.form.get('filename')     # Hmm.. filename은 그대로 filename에 입력함
-        content = request.form.get('content').encode('utf-8') # content는 utf-8로 인코딩을 함
-        if filename.find('..') != -1:   # ..가 filename에 포함되어 있다면 'bad characters,,'라는 문자열과 함께 upload_result.html을 전송함
+        filename = request.form.get('filename')     
+        content = request.form.get('content').encode('utf-8') 
+        if filename.find('..') != -1:       # 파일 이름에 ..이 들어있으면 안돼애애앳!!
             return render_template('upload_result.html', data='bad characters,,')
         with open(f'{UPLOAD_DIR}/{filename}', 'wb') as f:
             f.write(content)
@@ -26,13 +26,13 @@ def upload_memo():
 @APP.route('/read')
 def read_memo():
     error = False
-    data = b''
-    filename = request.args.get('name', '')
-    f = filename.replace("//", "/") # filename에서 '//' -> '/'로 변경
-    f = f.replace("../", "")        # filename에서 '../' -> ''로 변경
-    f = f.replace("./", "")         # filename에서 './' -> ''로 변경
-    f = f.replace("\\\\", "\\")     # filename에서 '\\\\' -> '\\'로 변경
-    f = f.replace("\\", "")         # filename에서 '\\' -> ''로 변경
+    data = b''          # .....//////
+    filename = request.args.get('name', '') 
+    f = filename.replace("//", "/") 
+    f = f.replace("../", "")        
+    f = f.replace("./", "")         
+    f = f.replace("\\\\", "\\")     
+    f = f.replace("\\", "")
     try:
         with open(f'{UPLOAD_DIR}/{f}', 'rb') as f:
             data = f.read()
@@ -49,3 +49,11 @@ if __name__ == '__main__':
         shutil.rmtree(UPLOAD_DIR)
     os.mkdir(UPLOAD_DIR)
     APP.run(host='0.0.0.0', port=8000)
+
+
+
+# /home/사용자명/.bash_history
+
+
+
+
