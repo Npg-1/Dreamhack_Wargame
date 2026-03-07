@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Secret Data System - Admin Panel{% endblock %}
+
+{% block content %}
+<h1>🛡️ Admin Panel</h1>
+
+<div style="margin: 1.5rem 0;">
+    <div style="background: #e8f5e8; padding: 1rem; border-radius: 8px; border-left: 4px solid #4caf50;">
+        <h3 style="color: #2e7d32; margin: 0 0 0.5rem 0;">✅ Access Granted</h3>
+        <p style="margin: 0; color: #2e7d32;">
+            Welcome, <strong>{{ username }}</strong>! You have successfully accessed the admin panel.
+        </p>
+    </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0;">
+    <div style="background: #e3f2fd; padding: 1.5rem; border-radius: 10px;">
+        <h3 style="color: #1976d2; margin-bottom: 1rem;">📊 System Status</h3>
+        <ul style="color: #555; margin: 0;">
+            <li>✅ Database: Online</li>
+            <li>✅ Search Service: Active</li>
+            <li>✅ Security: Enabled</li>
+            <li>✅ Backup: Current</li>
+        </ul>
+    </div>
+    
+    <div style="background: #fff3e0; padding: 1.5rem; border-radius: 10px;">
+        <h3 style="color: #f57c00; margin-bottom: 1rem;">👤 User Info</h3>
+        <ul style="color: #555; margin: 0;">
+            <li><strong>Username:</strong> {{ username }}</li>
+            <li><strong>Role:</strong> Administrator</li>
+            <li><strong>Access Level:</strong> Full</li>
+            <li><strong>Status:</strong> Active</li>
+        </ul>
+    </div>
+</div>
+
+<div style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); 
+            padding: 2rem; border-radius: 15px; margin: 2rem 0; text-align: center;">
+    <h2 style="color: white; margin: 0 0 1rem 0;">🏁 CONFIDENTIAL FLAG</h2>
+    <div style="background: rgba(255, 255, 255, 0.9); padding: 1rem; 
+                border-radius: 8px; font-family: 'Courier New', monospace;">
+        <h3 style="color: #333; margin: 0; font-size: 1.2rem;">{{ flag }}</h3>
+    </div>
+    <p style="color: white; margin: 1rem 0 0 0; opacity: 0.9; font-size: 0.9rem;">
+        Congratulations! You have successfully completed the challenge.
+    </p>
+</div>
+
+<div style="background: #f3e5f5; padding: 1.5rem; border-radius: 10px; margin-top: 2rem;">
+    <h3 style="color: #7b1fa2; margin-bottom: 1rem;">🔧 Admin Functions</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+        <button style="background: #7b1fa2; color: white; border: none; padding: 0.75rem; 
+                       border-radius: 5px; cursor: pointer;" onclick="alert('Function disabled in CTF environment')">
+            📝 Manage Users
+        </button>
+        <button style="background: #7b1fa2; color: white; border: none; padding: 0.75rem; 
+                       border-radius: 5px; cursor: pointer;" onclick="alert('Function disabled in CTF environment')">
+            🗄️ Database Admin
+        </button>
+        <button style="background: #7b1fa2; color: white; border: none; padding: 0.75rem; 
+                       border-radius: 5px; cursor: pointer;" onclick="alert('Function disabled in CTF environment')">
+            📊 View Reports
+        </button>
+        <button style="background: #7b1fa2; color: white; border: none; padding: 0.75rem; 
+                       border-radius: 5px; cursor: pointer;" onclick="alert('Function disabled in CTF environment')">
+            ⚙️ System Settings
+        </button>
+    </div>
+</div>
+
+<div style="text-align: center; margin-top: 2rem;">
+    <a href="{{ url_for('logout') }}" 
+       style="display: inline-block; background: #f44336; color: white; 
+              padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 5px;">
+        🚪 Logout
+    </a>
+</div>
+{% endblock %}
